@@ -10,6 +10,10 @@ const MongoStore = require("connect-mongo").default;
 const internshipRoutes = require("./routes/internshipRoutes");
 
 const app = express();
+
+// Required for secure session cookies behind Render's reverse proxy.
+app.set("trust proxy", 1);
+
 const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
@@ -60,7 +64,7 @@ app.use(
     name: "connect.sid",
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: process.env.MONGODB_URI,
     }),
@@ -75,25 +79,6 @@ app.use(
 
 app.use("/api/auth", authRoutes);
 
-// TEMPORARY SESSION DIAGNOSTIC ROUTE
-app.get("/api/session-check", (req, res) => {
-  req.session.testValue = "session-working";
-
-  req.session.save((err) => {
-    if (err) {
-      console.error("Session save failed:", err);
-      return res.status(500).json({
-        success: false,
-        message: "Session save failed",
-      });
-    }
-
-    res.json({
-      success: true,
-      hasSession: Boolean(req.session.testValue),
-    });
-  });
-});
 
 function requestLogger(req, res, next) {
   console.log(`${req.method} ${req.path}`);
