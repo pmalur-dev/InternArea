@@ -177,12 +177,12 @@ function logout(req, res) {
       });
     }
 
-    res.clearCookie("connect.sid", {
-      httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-    });
+  res.clearCookie("connect.sid", {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+    path: "/",
+  });
 
     return res.status(200).json({
       message: "Logout successful",
