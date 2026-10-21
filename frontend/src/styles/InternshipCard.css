@@ -1,0 +1,45 @@
+
+.internship-card {
+  display: flex;
+  gap: 16px;
+  padding: 22px;
+  background: white;
+  border: 1px solid #e1e5e9;
+  border-radius: 10px;
+  transition: box-shadow .15s ease;
+}
+
+.internship-card:hover {
+  box-shadow: 0 5px 18px rgb(30 50 60 / 7%);
+}
+
+.company-mark {
+  display: grid;
+  place-items: center;
+  flex: 0 0 48px;
+  height: 48px;
+  border-radius: 9px;
+  background: #eaf5f6;
+  color: #087e8b;
+  font-weight: 700;
+  font-size: 21px;
+}
+
+.internship-details { min-width: 0; flex: 1; }
+.internship-details h3 { margin-bottom: 7px; font-size: 18px; }
+.company-name { color: #687782; margin-bottom: 16px; }
+
+.internship-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 13px;
+  color: #52636c;
+}
+
+.card-actions, .form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 16px;
+}
